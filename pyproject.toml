@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "notelab"
+version = "0.2.0"
+description = "Work in Progress Flask App"
+authors = ["saragarcia6123 <saragarcia6123@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.13"
+flask = "3.1.0"
+flask-talisman = "1.1.0"
+toml = "0.10.2"
+flask-restx = "1.3.0"
+requests = "2.32.3"
+python-dotenv = "1.0.1"
+pyyaml = "6.0.2"
+pandas = "^2.2.3"
+sqlalchemy = "^2.0.36"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+notelab = "notelab.app:main"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "--cov=app --cov-report=term-missing"
+testpaths = ["tests/notelab"]
+python_files = ["*_test.py"]
+
+[pytest]
+pythonpath = 'src'
+env_files = '.env'

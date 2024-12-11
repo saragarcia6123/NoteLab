@@ -1,0 +1,65 @@
+{
+    "SQLITE_VERSION": "SQLite version: {sqlite_version}",
+
+    "SQLITE_INITIALIZING": "Initializing SQLiteAPI instance...",
+    "SQLITE_INITIALIZED": "SQLiteAPI instance initialized.",
+
+    "SQLITE_DISCONNECTING": "Disconnecting from SQLiteAPI instance...",
+    "SQLITE_DISCONNECTED": "SQLiteAPI instance disconnected.",
+
+    "INITIALIZING_CONNECTION": "Initializing connection to database {db_name}...",
+    "TERMINATING_CONNECTION": "Terminating connection to database {db_name}...",
+
+    "ALREADY_CONNECTED": "Already connected to database {db_name}.",
+    "NOT_CONNECTED": "Not connected to a database.",
+
+    "CONNECT_SUCCESS": "Successfully connected to database {db_name}.",
+    "CONNECT_FAIL": "Failed to connect to database {db_name}.",
+
+    "DISCONNECT_SUCCESS": "Database {db_name} connection closed.",
+    "DISCONNECT_FAIL": "Failed to close database connection {db_name}.",
+
+    "DB_EXISTS": "Database '{db_name}' already exists.",
+
+    "TABLE_EXISTS": "Table '{table_name}' already exists.",
+    "TABLE_FOUND": "Table '{table_name}' found.",
+    "TABLE_NOT_FOUND": "Table '{table_name}' not found.",
+
+    "NO_TABLES_FOUND": "No tables found in database '{db_name}'.",
+
+    "TABLE_CREATED": "Table '{table_name}' created successfully.",
+    "TABLE_CREATION_FAIL": "Failed to create table '{table_name}'.",
+
+    "TABLE_DELETED": "Table '{table_name}' deleted successfully.",
+    "TABLE_DELETION_FAIL": "Failed to delete table '{table_name}'.",
+
+    "TABLE_INSERTED": "Row inserted into table '{table_name}'.",
+    "TABLE_INSERTION_FAIL": "Failed to insert row into table '{table_name}'.",
+
+    "TABLE_UPDATED": "Table '{table_name}' updated successfully.",
+    "TABLE_UPDATE_FAIL": "Failed to update table '{table_name}'.",
+
+    "TABLE_RETRIEVED": "Successfully retrieved rows from table '{table_name}'.",
+    "TABLE_SCHEMA_RETRIEVED": "Successfully retrieved schema of table '{table_name}'.",
+
+    "ROWS_FOUND": "Row(s) found in table '{table_name}'.",
+    "ROWS_NOT_FOUND": "Row(s) not found in table '{table_name}'.",
+
+    "ROWS_RETRIEVED": "Successfully retrieved rows from table '{table_name}'.",
+    "ROWS_RETRIEVAL_FAIL": "Failed to retrieve rows from table '{table_name}'.",
+
+    "ROWS_INSERTED": "Row(s) inserted into table '{table_name}'.",
+    "ROWS_INSERTION_SUCCESS": "Row(s) inserted into table '{table_name}'.",
+    "ROWS_INSERTION_FAIL": "Failed to insert row(s) into table '{table_name}'.",
+
+    "ROWS_UPDATE_SUCCESS": "Row(s) updated in table '{table_name}'.",
+    "ROWS_UPDATE_FAIL": "Failed to update row(s) in table '{table_name}'.",
+
+    "ROWS_DELETED": "Row(s) deleted from table '{table_name}'.",
+    "ROWS_DELETION_FAIL": "Failed to delete row(s) from table '{table_name}'.",
+
+    "INVALID_ROWS": "Invalid row data for table '{table_name}'.",
+
+    "DB_PATH_NOT_FOUND": "Database path {db_path} not found.",
+    "INVALID_TABLE_NAME": "Invalid table name '{table_name}'."
+}

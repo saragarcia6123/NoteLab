@@ -1,0 +1,5 @@
+PROJECT_ROOT=src/{PACKAGE_NAME_UNDERSCORE}
+TESTS_DIR=tests/{PACKAGE_NAME_UNDERSCORE}
+DB_PATH=data/database.db
+SSL_CERT_FILE=ssl_certificate/cert.pem
+SSL_KEY_FILE=ssl_certificate/key.pem

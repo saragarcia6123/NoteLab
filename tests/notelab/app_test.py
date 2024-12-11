@@ -1,0 +1,1 @@
+from notelab import app

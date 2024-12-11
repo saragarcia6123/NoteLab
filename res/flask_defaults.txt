@@ -1,0 +1,5 @@
+APP={PROJECT_ROOT}/app/app.py
+PORT=5000
+RELOAD=true
+DEBUG=true
+HOST=127.0.0.1
