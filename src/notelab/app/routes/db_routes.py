@@ -1,4 +1,4 @@
-from flask_restx import Namespace, Resource
+from flask_restx import Namespace, Resource, fields
 from flask import request
 from utils.app_logger import setup_logger
 from utils.app_config import Config
@@ -7,7 +7,7 @@ from flask_restx import Api
 
 config = Config()
 
-logger = setup_logger('database_routes')
+logger = setup_logger('DBRoutes')
 root = config.database_endpoints.root
 endpoints = config.database_endpoints
 
@@ -28,6 +28,12 @@ def init_routes(flask_api: Api):
     flask_api.add_namespace(row_ns)
     flask_api.add_namespace(rows_ns)
 
+# POST Response model
+generic_response_model = tables_ns.model('TablePostResponse', {
+    "message": fields.String(description="Result of the operation", example="Success"),
+    "status": fields.Integer(description="HTTP status code", example=200),
+})
+
 @table_ns.route(endpoints.tables)
 class TablesResource(Resource):
     def get(self):
@@ -36,26 +42,49 @@ class TablesResource(Resource):
 
 @table_ns.route(endpoints.table)
 class TableResource(Resource):
+
+    # GET Response model
+    get_response_model = tables_ns.model('TableGetResponse', {
+        "tables": fields.List(fields.String, description="List of table names"),
+        "status": fields.Integer(description="HTTP status code"),
+    })
+
+    @table_ns.marshal_with(get_response_model)
     def get(self, table_name):
         logger.info(f"Fetching table {table_name} from {request.url}")
         return db.get_table(table_name)
 
+    # POST Request model
+    post_request_model = tables_ns.model('TablePostRequest', {
+        'columns': fields.List(
+            fields.String,
+            required=True,
+            description='List of column definitions (e.g., id INT PRIMARY KEY)',
+            example=["id INT PRIMARY KEY", "name VARCHAR(255)", "age INT"]
+        ),
+    })
+
+    @table_ns.expect(post_request_model)
+    @table_ns.marshal_with(generic_response_model)
     def post(self, table_name):
         logger.info(f"Creating table {table_name} from {request.url}")
         if not request.is_json:
-            return {"error": "Request must be JSON"}, 400
+            return {"message": "Error: Request must be JSON", "status": 400}
         data = request.get_json()
         columns = data.get('columns')
         if not columns:
-            return {"error": "No columns provided."}, 400
+            return {"message": "No columns provided.", "status": 400}
         try:
-            return db.create_table(table_name, columns=columns)
+            message, status = db.create_table(table_name, columns=columns)
+            return {"message": message, "status": status}
         except Exception as e:
-            return {"error": str(e)}, 500
+            return {"message": e, "status": 500}
 
+    @table_ns.marshal_with(generic_response_model)
     def delete(self, table_name):
         logger.info(f"Deleting table {table_name} from {request.url}")
-        return db.drop_table(table_name)
+        message, status = db.drop_table(table_name)
+        return {"message": message, "status": status}
 
 @schema_ns.route(endpoints.table_schema)
 class TableSchemaResource(Resource):

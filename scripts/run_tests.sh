@@ -11,8 +11,12 @@ if [ -z "$TESTS_DIR" ]; then
   exit 1
 fi
 
+export TEST_ENV=true
+
 PYTHONPATH=$(pwd)/src
 export PYTHONPATH
 pytest --cov=src/notelab --cov-report=term-missing "$TESTS_DIR"
+
+unset TEST_ENV
 
 exit $?

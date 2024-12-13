@@ -7,15 +7,14 @@ from notelab.db.utils import to_snake_case, verify_name
 
 class ConnectionHandler:
 
-    def __init__(self, db_name):
+    def __init__(self, logger, db_name, messages):
         self.connected = None
         self.db = None
         self.db_path = None
         self.cursor = None
-        self.logger = setup_logger('app')
+        self.logger = logger
         self.db_name = db_name
-        self.connection = None
-        self.MESSAGES = json.load(open(os.path.join(os.path.dirname(__file__), 'messages.json')))
+        self.MESSAGES = messages
 
     def __del__(self):
         self.disconnect()

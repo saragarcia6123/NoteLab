@@ -7,17 +7,17 @@
     "SQLITE_DISCONNECTING": "Disconnecting from SQLiteAPI instance...",
     "SQLITE_DISCONNECTED": "SQLiteAPI instance disconnected.",
 
-    "INITIALIZING_CONNECTION": "Initializing connection to database {db_name}...",
-    "TERMINATING_CONNECTION": "Terminating connection to database {db_name}...",
+    "INITIALIZING_CONNECTION": "Initializing connection to database '{db_name}'...",
+    "TERMINATING_CONNECTION": "Terminating connection to database '{db_name}'...",
 
-    "ALREADY_CONNECTED": "Already connected to database {db_name}.",
+    "ALREADY_CONNECTED": "Already connected to database '{db_name}'.",
     "NOT_CONNECTED": "Not connected to a database.",
 
-    "CONNECT_SUCCESS": "Successfully connected to database {db_name}.",
+    "CONNECT_SUCCESS": "Successfully connected to database '{db_name}'.",
     "CONNECT_FAIL": "Failed to connect to database {db_name}.",
 
-    "DISCONNECT_SUCCESS": "Database {db_name} connection closed.",
-    "DISCONNECT_FAIL": "Failed to close database connection {db_name}.",
+    "DISCONNECT_SUCCESS": "Database '{db_name}' connection closed.",
+    "DISCONNECT_FAIL": "Failed to close database connection '{db_name}'.",
 
     "DB_EXISTS": "Database '{db_name}' already exists.",
 
@@ -60,6 +60,6 @@
 
     "INVALID_ROWS": "Invalid row data for table '{table_name}'.",
 
-    "DB_PATH_NOT_FOUND": "Database path {db_path} not found.",
+    "DB_PATH_NOT_FOUND": "Database path '{db_path}' not found.",
     "INVALID_TABLE_NAME": "Invalid table name '{table_name}'."
 }
