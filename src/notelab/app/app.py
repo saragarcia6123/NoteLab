@@ -6,12 +6,10 @@ from flask import Flask, request, redirect
 from flask_restx import Api
 from flask_talisman import Talisman
 from notelab.app.routes import db_routes
+from notelab.utils.app_config import AppConfig
+from notelab.utils.app_logger import setup_logger
 
-from utils.app_config import Config
-from utils.app_logger import setup_logger
-
-config = Config()
-
+config = AppConfig()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('FLASK_SECRET_KEY')
 api_bp = flask.Blueprint("api", __name__, url_prefix="/api/")

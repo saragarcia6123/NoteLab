@@ -10,7 +10,7 @@ fi
 
 if [ -f "$cert_path/key.pem" ] && [ -f "$cert_path/cert.pem" ]; then
     read -r -p "SSL certificate and key already exist. Do you want to overwrite them? (y/n): " choice
-    choice=${choice:-n}  # Default to "n" if no input
+    choice=${choice:-n}
     case "$choice" in
         y|Y ) echo "Overwriting SSL certificate and key...";;
         * ) echo "Skipping SSL certificate and key generation"; exit 0;;
@@ -26,8 +26,8 @@ openssl req -new -x509 -key "${cert_path}/key.pem" -out "${cert_path}/cert.pem" 
 echo "SSL certificate and key generated successfully."
 
 # Add SSL certificate and key to environment variables
-./scripts/update_env.sh SSL_CERT_FILE "${cert_path}/cert.pem"
-./scripts/update_env.sh SSL_KEY_FILE "${cert_path}/key.pem"
+./scripts/bash/config/dotenv/set_var.sh SSL_CERT_FILE "${cert_path}/cert.pem"
+./scripts/bash/config/dotenv/set_var.sh SSL_KEY_FILE "${cert_path}/key.pem"
 
 echo "SSL certificate and key added to .env file"
 

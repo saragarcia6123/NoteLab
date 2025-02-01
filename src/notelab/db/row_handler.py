@@ -4,7 +4,6 @@ from typing import List, Optional, Tuple
 from notelab.db.connection_handler import ConnectionHandler
 from notelab.db.table_handler import TableHandler
 
-
 class RowHandler:
 
     def __init__(self, logger: logging.Logger, db_name: str, messages: dict, connection_handler: ConnectionHandler, table_handler: TableHandler):

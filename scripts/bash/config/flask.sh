@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Setting up Flask..."
+
 # Extract $PROJECT_ROOT from .env
 PROJECT_ROOT=$(grep -E '^PROJECT_ROOT=' .env | cut -d '=' -f 2)
 
@@ -64,12 +66,12 @@ full_setup() {
     # shellcheck disable=SC2013
     for var in $(grep -E '^[^#]' res/flask_defaults.txt | cut -d '=' -f 1); do
         default_var="FLASK_${var^^}"
-        ./scripts/set_env_var.sh "$default_var" "${!default_var}"
+        ./scripts/bash/config/dotenv/set_var.sh "$default_var" "${!default_var}"
     done
 
     if [ "$skip_secret_key" = false ]; then
         FLASK_SECRET_KEY=$(openssl rand -base64 32)
-        ./scripts/set_env_var.sh FLASK_SECRET_KEY "$FLASK_SECRET_KEY"
+        ./scripts/bash/config/dotenv/set_var.sh FLASK_SECRET_KEY "$FLASK_SECRET_KEY"
     fi
 
     echo "Parameters set."
@@ -77,3 +79,5 @@ full_setup() {
 
 # Run the full setup
 full_setup
+
+echo "Flask setup complete."

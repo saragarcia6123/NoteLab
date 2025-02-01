@@ -1,16 +1,19 @@
 #!/bin/bash
 
-# Function to run the main commands
 run_main() {
+    echo "Running main script..."
+
+    find scripts/bash -type f -name "*.sh" -exec chmod +x {} \;
+
     export "$(grep -v '^#' .env | xargs)"
     PYTHONPATH="$(pwd)/$PROJECT_ROOT:$PYTHONPATH"
     export PYTHONPATH="$PYTHONPATH"
 
-    ./scripts/run_tests.sh
-    ./scripts/run_flask.sh
+    ./scripts/bash/run/tests.sh
+    ./scripts/bash/run/flask.sh
+
 }
 
-# Run the main commands and catch errors
 if ! run_main; then
     echo "Error detected."
 fi

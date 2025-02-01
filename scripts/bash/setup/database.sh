@@ -9,8 +9,8 @@ mkdir -p "$(dirname "$database_path")"
 # Check if the database file exists
 create=false
 if [ -f "$database_path" ]; then
-    echo "Database file $database_path exists. Would you like to overwrite it? (y/n)"
-    read -r choice
+    read -r -p "Database file $database_path exists. Would you like to overwrite it? (y/n): "
+    choice=${choice:-n}
     case "$choice" in
         y|Y ) echo "Overwriting database file..."; create=true;;
         * ) echo "Skipping database setup...";;

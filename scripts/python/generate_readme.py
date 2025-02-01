@@ -1,6 +1,9 @@
-from datetime import datetime
-import toml
+import sys
 import subprocess
+subprocess.check_call([sys.executable, "-m", "pip", "install", "toml"])
+
+import toml
+from datetime import datetime
 import os
 
 def get_remote_url():
@@ -16,50 +19,72 @@ def get_project_metadata():
         with open('pyproject.toml', 'r') as file:
             pyproject_data = toml.load(file)
 
-        project = pyproject_data.get('tool', {}).get('poetry', {})
+        project = pyproject_data.get('project', {})
         _project_name = project.get('name', 'Unknown Project')
         _project_version = project.get('version', 'notelab')
         _project_description = project.get('description', 'No description available')
         _project_authors = project.get('authors', [])
         _project_license = project.get('license', 'No license available')
 
-        return _project_name, _project_version, _project_description, ', '.join(_project_authors), _project_license
+        return _project_name, _project_version, _project_description, _project_authors, _project_license
     except Exception as e:
         print(f"Error reading pyproject.toml: {e}")
         return 'Unknown Project', 'notelab', 'No description available', [], 'No license available'
 
-project_name, project_version, project_description, project_authors, project_license = get_project_metadata()
+def get_description():
+    try:
+        with open('DESCRIPTION.md', 'r') as file:
+            return file.read()
+    except Exception as e:
+        print(f"Error reading README.md: {e}")
+        return ''
+
+project_name, project_version, project_summary, project_authors, project_license = get_project_metadata()
+
+author_names = [project_authors['name'] for project_authors in project_authors]
+author_emails = [project_authors['email'] for project_authors in project_authors]
+
+project_authors = ', '.join([f"{name} <a href='mailto:{email}'>{email}</a>" for name, email in zip(author_names, author_emails)])
 
 last_updated = datetime.now().strftime('%Y-%m-%d %H:%M')
-
 remote_url = get_remote_url()
 folder_name = os.path.splitext(os.path.basename(remote_url))[0]
+description = get_description()
+license_link = remote_url.replace('.git', '/blob/main/LICENSE')
 
 readme_content = f"""
 ## {project_name} - {project_version}
 ## Authors: {project_authors}
-## License: {project_license}
+## License: [{project_license}]({license_link})
+### {project_summary}
 
 ## Description
-{project_description}
+{description}
 
 ## Last Updated: {last_updated}
+
+## Repository: [GitHub]({remote_url})
+
+## Prerequisites:
+- Python 3.11 or Conda Environment
+- Bash Shell
 
 ## Installation
 
 1. Clone the repository:
-    ```bash
+    ```sh
     git clone {remote_url}
     cd {folder_name}
     ```
 
 2. **Run the setup script:**
    ```sh
-   source ./scripts/setup.sh
+   source ./scripts/bash/setup/setup.sh
+    ```
 
 3. **Run the application:**
    ```sh
-   ./scripts/run.sh
+   ./scripts/bash/run/main.sh
    ```
 """
 

@@ -4,10 +4,9 @@ It is used for internal API requests
 """
 
 import requests
-from utils.app_config import Config
+from utils.app_config import AppConfig
 
-config = Config()
-
+config = AppConfig()
 server_url = config.server_url
 endpoints = config.database_endpoints
 root = endpoints.root

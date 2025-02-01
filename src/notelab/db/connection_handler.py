@@ -1,8 +1,6 @@
-import json
 import os
 import sqlite3
 from typing import Tuple
-from utils.app_logger import setup_logger
 from notelab.db.utils import to_snake_case, verify_name
 
 class ConnectionHandler:

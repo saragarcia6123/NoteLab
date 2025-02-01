@@ -270,6 +270,6 @@ class TableHandler:
             return message, 200
 
         except Exception as e:
-            message = f"{self.MESSAGES["TABLE_DELETION_FAIL"].format(table_name=table_name)}: {str(e)}"
+            message = f"{self.MESSAGES['TABLE_DELETION_FAIL'].format(table_name=table_name)}: {str(e)}"
             self.logger.error(message)
             return message, 500

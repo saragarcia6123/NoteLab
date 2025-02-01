@@ -5,7 +5,6 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..')))
 
 from . import app
-from notelab import db
-import utils
+from notelab import db, utils
 
 __all__ = ['app', 'db', 'utils']

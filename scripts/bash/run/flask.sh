@@ -1,11 +1,17 @@
 #!/bin/bash
 
+echo "Starting Flask..."
+
 # Load environment variables from .env file
 set -o allexport
 source .env
 set +o allexport
 
-# Initialize the command
+if [[ -z "$SSL_CERT_FILE" || -z "$SSL_KEY_FILE" ]]; then
+    echo "SSL certificate or key file is missing!"
+    exit 1
+fi
+
 cmd="flask run --cert=$SSL_CERT_FILE --key=$SSL_KEY_FILE"
 
 for var in $(compgen -e); do
@@ -15,7 +21,6 @@ for var in $(compgen -e); do
     fi
 done
 
-# Add debug and reload options if they are set to true
 if [ "$FLASK_DEBUG" = "true" ]; then
     cmd="$cmd --debug"
 else
@@ -28,6 +33,5 @@ else
     cmd="$cmd --no-reload"
 fi
 
-# Run the Flask application
 export FLASK_APP=$FLASK_APP
 eval "$cmd"

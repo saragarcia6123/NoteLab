@@ -1,0 +1,5 @@
+Windows is currently not supported.
+Please use a Bash terminal to run the Bash scripts instead.
+
+These scripts have been tested only on Red Hat-based Linux distributions.
+These scripts are intended to be run from the root directory of the repository.
